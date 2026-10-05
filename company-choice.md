@@ -19,7 +19,7 @@ También me gustaría ser capaz de crear un sistema de agentes para pasar de dis
 4. Ventas: automatizar outreach/prospecting, obtener alertas de inactividad, tener agentes que sugieran el ángulo de propuesta más adecuada para cada situación. 
 
 ## El Reto de automatización de IA que más ganas tengo de construir
-- Conectar los agentes que gestionan los departamentos verticales (ejemplo: atención al cliente, comunicación y mktg, ventas) a un orquestrador para poder reportar automáticamente al CEO. También, que este agente este conextado con el Business Principal: Operaciones de Selección (principal fuente de ingresos) y que leadership pueda tener una foto de la evolución de su core.
+- Conectar los agentes que gestionan los departamentos verticales (ejemplo: atención al cliente, comunicación y mktg, ventas) a un orquestrador para poder reportar automáticamente al CEO. También, que este agente esté conectado con el Business Principal: Operaciones de Selección (principal fuente de ingresos) y que leadership pueda tener una foto de la evolución de su core.
 
 ## My AI Agent Idea
 - Descripción: Un agente que cree un pool de candidatos para que otro agente pueda evaluar los datos de los CVs.
