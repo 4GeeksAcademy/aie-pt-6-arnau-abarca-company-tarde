@@ -137,6 +137,15 @@ Elige Nexova si te atraen:
 
 Los retos de IA en Nexova incluyen búsqueda semántica sobre una base de datos de candidatos, automatización de soporte de primera línea que debe respetar SLAs, un pipeline de scoring de CVs con rankings explicables, y un motor de recomendación para programas formativos. Si quieres que tu portfolio demuestre AI Engineering aplicada directamente a las operaciones principales de una empresa — no solo a sus herramientas internas — Nexova es tu empresa.
 
+## Contexto operativo ampliado
+
+Estos documentos complementan el briefing general con reglas y datos concretos del negocio:
+
+- [Líneas de servicio](./contexts/nexova/lineas-de-servicio.md)
+- [Modelo de tarifas](./contexts/nexova/modelo-de-tarifas.md)
+- [SLA del proceso de contratación](./contexts/nexova/sla-proceso-contratacion.md)
+- [Manejo de objeciones comerciales](./contexts/nexova/manejo-de-objeciones.md)
+
 ---
 
 _Documento interno — 4Geeks Academy · AI Engineering Track_
