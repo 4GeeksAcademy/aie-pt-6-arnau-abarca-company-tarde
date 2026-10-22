@@ -66,7 +66,7 @@ Tu landing page debe incluir las siguientes secciones, en este orden:
 
 ### Por qué Nexova (2 columnas)
 
-- **12 años de experiencia** en el mercado latinoamericano
+- **15 años de experiencia** en el mercado latinoamericano
 - **Presencia regional:** España y Estados Unidos
 - **+500 procesos exitosos** de selección completados
 - **Especialización sectorial** en tecnología, retail y finanzas
@@ -79,7 +79,7 @@ Tu landing page debe incluir las siguientes secciones, en este orden:
 
 ### Footer
 
-- © 2025 Nexova. Todos los derechos reservados.
+- © 2026 Nexova. Todos los derechos reservados.
 - LinkedIn | Instagram
 
 ---
