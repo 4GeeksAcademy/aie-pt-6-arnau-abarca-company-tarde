@@ -1,0 +1,17 @@
+{
+  "name": "nexova-website",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tailwindcss -i ./styles.css -o ./assets/styles.css --minify",
+    "watch": "tailwindcss -i ./styles.css -o ./assets/styles.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.0",
+    "http-server": "14.1.1",
+    "tailwindcss": "4.3.0"
+  }
+}

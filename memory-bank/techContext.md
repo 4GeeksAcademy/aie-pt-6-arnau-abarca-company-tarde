@@ -1,5 +1,7 @@
 # Contexto técnico
 
+**Actualizado:** 2026-10-22.
+
 ## Stack tecnológico
 
 ### Herramientas actuales de Nexova
@@ -9,13 +11,37 @@
 - **ATS interno:** sistema de seguimiento de candidatos construido a medida a principios de la década de 2010.
 - **Google Workspace:** incluye herramientas como Drive, Forms, hojas de cálculo y correo, usadas para conectar procesos que hoy son mayormente manuales.
 
-Estas herramientas forman el entorno actual de la empresa; no consta que estén integradas de manera adecuada.
+Estas herramientas forman el entorno actual de la empresa descrito en [CONTEXT.es.md](../CONTEXT.es.md); no son integraciones implementadas por el proyecto.
 
 ### Stack del proyecto
 
-El repositorio aún es una plantilla de carpetas y documentación, sin aplicaciones ejecutables ni un stack de producción establecido. Hay metadata para el paquete privado `@repo/shared-types`, que expone tipos TypeScript; no hay un runner de workspace configurado en la raíz.
+El monorepo ya contiene una web pública ejecutable de forma local. Su alcance es una landing estática, sin backend ni captura de datos, definida en [spec.md](../specs/001-website-nexova/spec.md). Las fases 1 a 3 están completadas y la fase 4 permanece pendiente en [tasks.md](../specs/001-website-nexova/tasks.md); no hay un despliegue de producción confirmado.
 
-La guía del repositorio recomienda **FastAPI** para una API centralizada, pero no hay una API implementada que confirme esa elección. El framework de frontend, la base de datos, el proveedor de modelos de IA, la infraestructura de despliegue y los mecanismos de autenticación están por decidir.
+| Componente de la web | Implementación y fuente                                                                                                                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Documento público    | HTML5 semántico en español, metadatos y JSON-LD `Organization`: [index.html](../uis/website/index.html).                                                                                                            |
+| Estilos              | Tailwind CSS y CLI 4.3.0, sin framework de frontend; entrada con importación, fuente local y tokens en [styles.css](../uis/website/styles.css). Versiones y scripts en [package.json](../uis/website/package.json). |
+| Navegación           | JavaScript nativo con menú no modal, teclado, estado ARIA, cambios de breakpoint y alternativa sin JavaScript: [navigation.js](../uis/website/navigation.js) e [index.html](../uis/website/index.html).             |
+| Entorno local        | Node.js >=22, npm y `http-server` 14.1.1. Dependencias directas fijadas en [package.json](../uis/website/package.json) y resolución reproducible en [package-lock.json](../uis/website/package-lock.json).          |
+| Recursos             | Fotografías WebP responsive, Inter variable e iconos Lucide servidos localmente; procedencia y licencias en [README.es.md](../uis/website/README.es.md).                                                            |
+
+La entrada Tailwind genera `assets/styles.css` minificado, excluido de Git junto con las dependencias locales mediante [.gitignore del componente](../uis/website/.gitignore). El HTML sí enlaza ese CSS generado; debe compilarse después de instalar. Las decisiones del componente y sus archivos están descritos en [plan.md](../specs/001-website-nexova/plan.md).
+
+Existe además metadata para el paquete privado `@repo/shared-types` en [package.json del paquete compartido](../packages/shared/package.json); no implica un runner de workspace en la raíz. La guía [README.es.md](../README.es.md) recomienda **FastAPI** para una API centralizada, pero esa API no está implementada. La elección de HTML estático solo confirma el frontend de la landing; no decide el stack de futuras interfaces, base de datos, modelos de IA, autenticación o despliegue.
+
+### Ejecución y verificaciones de la web
+
+Desde `uis/website/`, los comandos documentados y comprobados son:
+
+```bash
+npm ci
+npm run build
+npx http-server . -a 0.0.0.0 -p 8080
+```
+
+El script `watch` está configurado, pero no se ha comprobado su recompilación automática. Si el puerto está ocupado, usar otro; no servir la raíz del monorepo ni hacer público el puerto sin revisar el contenido expuesto. La ejecución local no constituye una publicación final. Instrucciones y resultados en [README.es.md](../uis/website/README.es.md).
+
+Las comprobaciones se realizaron con Playwright/Chromium y axe-core 4.14.0 como herramientas temporales fuera del proyecto, no como dependencias ni suite de tests versionada. Incluyen responsive, teclado, contraste, JSON-LD comparado con el briefing, zoom nativo al 200%, redistribución a 320 CSS px y revisión de red y almacenamiento. Sus resultados y limitaciones están en [README.es.md](../uis/website/README.es.md); no equivalen a certificación WCAG o de seguridad. PageSpeed Insights/Lighthouse y las evidencias de rendimiento siguen pendientes en [tasks.md](../specs/001-website-nexova/tasks.md).
 
 ## Decisiones y pautas de arquitectura
 
@@ -25,12 +51,13 @@ La guía del repositorio recomienda **FastAPI** para una API centralizada, pero 
 - Documentar cada aplicación, servicio, agente o pipeline en su propia subcarpeta, incluyendo su propósito, tecnología y forma de ejecución.
 - Las herramientas actuales de Nexova deberán tratarse como sistemas existentes a integrar o sustituir según se definan los casos de uso; el método de integración todavía no está especificado.
 
-Estas pautas describen la arquitectura recomendada por la plantilla, no componentes ya desplegados.
+Estas pautas generales describen la arquitectura recomendada por [README.es.md](../README.es.md), no servicios ya desplegados. Para la web, aplicar además el alcance de [spec.md](../specs/001-website-nexova/spec.md), las decisiones de [plan.md](../specs/001-website-nexova/plan.md) y las salvaguardas de [AGENTS.md](../AGENTS.md).
 
 ## Restricciones técnicas y aspectos pendientes
 
-- No asumir que existe una plataforma integrada, telemetría centralizada o despliegue automatizado: el contexto de Nexova indica que hoy no dispone de ellos.
-- El soporte externalizado tiene un SLA comprometido de 24 horas; las soluciones de soporte deben diseñarse teniendo en cuenta ese objetivo operativo.
-- Los datos de candidatos, empleados, clientes y tickets pueden contener información personal o sensible. Antes de procesarlos, deben definirse y documentarse las reglas de acceso, privacidad, retención y tratamiento de datos; la plantilla no fija todavía esas políticas.
-- No están especificados los protocolos ni las APIs de integración de HubSpot, Zendesk, el ATS o Google Workspace.
-- Siguen pendientes las decisiones sobre frontend, persistencia, colas, proveedor de IA, autenticación/autorización, observabilidad, CI/CD y despliegue.
+- No asumir plataforma integrada, telemetría centralizada o despliegue automatizado. Las herramientas corporativas y el SLA de soporte de 24 horas pertenecen al entorno descrito en [CONTEXT.es.md](../CONTEXT.es.md), no a capacidades de la landing.
+- La web no incorpora persistencia, autenticación, analítica ni integración con HubSpot, Zendesk, ATS o Google Workspace. Esos protocolos y APIs siguen por definir; véanse [spec.md](../specs/001-website-nexova/spec.md) y [CONTEXT.es.md](../CONTEXT.es.md).
+- El formulario y su validación siguen sin implementar en [application.html](../uis/website/application.html) y [validation.js](../uis/website/validation.js). Su futura entrega tendrá envío simulado, sin persistencia ni envío real, según [BRIEFING.md](../uis/website/BRIEFING.md) y [AGENTS.md](../AGENTS.md).
+- Mantener bloqueada la publicación final hasta disponer del formulario y validar el recorrido. La exposición pública temporal para auditoría, la puntuación mínima de rendimiento de 80 y la captura de resultados son trabajo de fase 4: [plan.md](../specs/001-website-nexova/plan.md) y [tasks.md](../specs/001-website-nexova/tasks.md).
+- Los datos de candidatos, empleados, clientes y tickets pueden ser sensibles. Antes de procesarlos hay que definir acceso, privacidad, retención y tratamiento; las comprobaciones de una landing sin captura no resuelven esas políticas. Salvaguardas en [AGENTS.md](../AGENTS.md).
+- Siguen pendientes las decisiones generales de persistencia, colas, proveedor de IA, autenticación/autorización, observabilidad, CI/CD, despliegue y futuras interfaces. No extender el stack de la landing al resto del sistema sin una decisión documentada; alcance general en [projectbrief.md](./projectbrief.md).

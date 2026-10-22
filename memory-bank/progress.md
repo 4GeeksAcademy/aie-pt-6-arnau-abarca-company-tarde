@@ -1,24 +1,37 @@
 # Progreso del proyecto
 
+**Actualizado:** 2026-10-22.
+
 ## Estado actual del desarrollo
 
-- El repositorio está en fase de preparación: contiene la estructura base del monorepo, guías y documentación de contexto para Nexova.
-- Se han documentado el brief del proyecto y el contexto técnico en `memory-bank/`.
-- No hay aplicaciones o servicios ejecutables del proyecto implementados todavía. Existe metadata para el paquete TypeScript `@repo/shared-types`, pero no un runner de workspace en la raíz.
-- La arquitectura propuesta por la guía incluye una API centralizada en FastAPI y una organización por responsabilidades; aún no está confirmada mediante una implementación.
+- El primer caso de uso implementado es la landing pública de Nexova. Su alcance, usuarios y criterios de aceptación están en [spec.md](../specs/001-website-nexova/spec.md); el trabajo se organiza en [plan.md](../specs/001-website-nexova/plan.md) y [tasks.md](../specs/001-website-nexova/tasks.md).
+- Las fases 1 a 3 están completadas: base ejecutable, contenido y diseño responsive, navegación, SEO, Schema.org y comprobaciones de accesibilidad y privacidad. La fase 4 sigue pendiente según [tasks.md](../specs/001-website-nexova/tasks.md).
+- La landing está en [index.html](../uis/website/index.html), con Tailwind compilado desde [styles.css](../uis/website/styles.css) y navegación móvil en [navigation.js](../uis/website/navigation.js). La instalación y ejecución local están documentadas en [README.es.md de la web](../uis/website/README.es.md).
+- El contenido y el marcado `Organization` siguen [BRIEFING.md](../uis/website/BRIEFING.md), con el diseño de [DESIGN.md](../uis/website/docs/DESIGN.md) y las correcciones de auditoría de [AGENTS.md](../AGENTS.md): fundación en 2011, 15 años de experiencia y copyright 2026.
+- El formulario es una entrega independiente: [application.html](../uis/website/application.html) y [validation.js](../uis/website/validation.js) siguen vacíos. El CTA prepara su destino, pero el recorrido de registro y CA-02 no se consideran completados. La publicación final está aplazada, como recoge [plan.md](../specs/001-website-nexova/plan.md).
+- El contexto general se mantiene en [projectbrief.md](./projectbrief.md) y [techContext.md](./techContext.md). FastAPI sigue siendo una propuesta, no una API implementada; la organización general del monorepo se describe en [README.es.md](../README.es.md).
+
+## Validaciones realizadas
+
+Los resultados y sus límites están documentados en [README.es.md de la web](../uis/website/README.es.md):
+
+- Instalación mediante `npm ci`, compilación y servidor `npx` comprobados. La auditoría de dependencias reportó cero vulnerabilidades conocidas en la comprobación documentada del 2026-10-22; no es una garantía permanente. El modo `watch` está configurado, pero su recompilación automática no se ha verificado.
+- Contenido y navegación revisados a 375px, 768px y 1440px; teclado, foco, menú y alternativa sin JavaScript comprobados. El JSON-LD se comparó estructuralmente con el briefing.
+- Axe-core 4.14.0 sin infracciones detectadas en los estados revisados de móvil y escritorio, complementado con recorrido de teclado. Zoom nativo al 200% y redistribución a 320 CSS px comprobados sin desbordamientos ni solapamientos detectados.
+- Las visitas revisadas no capturaron datos ni generaron peticiones automáticas a terceros o almacenamiento del navegador. Esto no certifica seguridad ni conformidad completa con WCAG; no se ha probado con un lector de pantalla real ni con un validador externo de Schema.org.
 
 ## Limitaciones actuales
 
-- No se ha seleccionado ni implementado un stack completo para frontend, persistencia, IA, autenticación, observabilidad, CI/CD o despliegue.
-- Las herramientas actuales de Nexova (HubSpot, Zendesk legacy, ATS interno y Google Workspace) no tienen integraciones documentadas para este proyecto.
-- No están definidas las políticas de acceso, privacidad, retención y tratamiento de los datos personales que pueden aparecer en candidatos, empleados, clientes y tickets.
-- No existen todavía datos de evaluación ni métricas de producto que permitan medir la calidad de agentes, automatizaciones o pipelines.
-- El soporte al cliente tiene un SLA comprometido de 24 horas, mientras que el tiempo medio de resolución indicado en el contexto es de 48 horas.
+- Pendientes la URL pública temporal de Codespaces, PageSpeed Insights o Lighthouse, la captura con rendimiento mínimo de 80 y el cierre de la matriz de aceptación: [fase 4 de tasks.md](../specs/001-website-nexova/tasks.md). No hay todavía una puntuación de rendimiento verificada.
+- La integración del formulario permanece bloqueada por su entrega independiente. La referencia al mercado latinoamericano sigue pendiente de aclaración; no se deben inventar sedes ni publicar direcciones exactas sin confirmar, según [AGENTS.md](../AGENTS.md).
+- El stack confirmado se limita a la web estática. Persistencia, IA, autenticación, observabilidad, CI/CD y despliegue de producción siguen por definir; véase [techContext.md](./techContext.md).
+- HubSpot, Zendesk legacy, ATS interno y Google Workspace son sistemas existentes, no integraciones implementadas por este proyecto. Tampoco hay una plataforma integrada de evaluación o métricas de producto confirmada; contexto en [CONTEXT.es.md](../CONTEXT.es.md).
+- Antes de procesar datos de candidatos, empleados, clientes o tickets se deben definir acceso, privacidad, retención y tratamiento. La landing actual no resuelve esas políticas: [restricciones de techContext.md](./techContext.md).
+- El contexto de soporte describe 48 horas de resolución media frente a un SLA de 24 horas; esa necesidad operativa sigue fuera del alcance de la landing: [CONTEXT.es.md](../CONTEXT.es.md).
 
 ## Próximos pasos sugeridos
 
-1. Elegir un caso de uso inicial y sus usuarios, alcance y criterios de aceptación. Conviene priorizar un proceso con impacto operativo claro, como reducir el tiempo de resolución de soporte o agilizar el cribado de candidatos.
-2. Acordar las decisiones técnicas mínimas para ese caso: API, interfaz, almacenamiento, integraciones, autenticación y despliegue, documentando las decisiones en `docs/`.
-3. Definir el origen, los permisos y las reglas de tratamiento de los datos necesarios; preparar datos de prueba que no expongan información personal real.
-4. Implementar un primer flujo vertical en las carpetas correspondientes del monorepo, siguiendo la guía de arquitectura y documentando cómo ejecutarlo.
-5. Crear evaluaciones y métricas para validar el resultado con usuarios; añadir observabilidad antes de ampliar el alcance o automatizar decisiones sensibles.
+1. Completar únicamente cuando se solicite la fase 4 de [tasks.md](../specs/001-website-nexova/tasks.md), documentando resultados reales y requisitos pendientes sin confundir auditoría temporal con publicación final.
+2. Preparar una especificación independiente para el formulario y su envío simulado conforme a [BRIEFING.md](../uis/website/BRIEFING.md); no añadir persistencia ni envío real como parte de esa entrega.
+3. Validar el recorrido landing-formulario antes de cerrar CA-02 y publicar, de acuerdo con [spec.md](../specs/001-website-nexova/spec.md) y [plan.md](../specs/001-website-nexova/plan.md).
+4. Para futuros servicios y automatizaciones, acordar arquitectura y reglas de datos antes de integrar sistemas, manteniendo las decisiones pendientes de [techContext.md](./techContext.md).
