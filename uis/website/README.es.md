@@ -99,4 +99,12 @@ Se revisaron las fuentes de la landing sin detectar patrones de credenciales; lo
 
 La comprobación de teclado y las capturas complementan axe-core, pero no certifican por sí solas la conformidad completa con WCAG. No se ha realizado una prueba de usuario con lector de pantalla ni una validación externa del marcado Schema.org. No hay una suite de pruebas de la landing configurada.
 
-La fase 4, incluida PageSpeed Insights/Lighthouse, la URL pública temporal y las evidencias de rendimiento, continúa pendiente según [tasks.md](../../specs/001-website-nexova/tasks.md). La integración del formulario y CA-02 permanecen pendientes.
+## Auditoría de fase 4: 2026-10-23
+
+Se reconstruyó la hoja de estilos con `npm run build` y `node --check navigation.js` terminó correctamente. Para limitar la exposición pública, se preparó una copia temporal en `/tmp/nexova-public-audit/` con el HTML, navegación, CSS y recursos necesarios; no se sirvió la raíz del monorepo ni se expusieron `node_modules`, el lockfile o la documentación. La copia incluyó `application.html` vacío, que es el destino enlazado por «Talento» y el CTA. No se modificaron `application.html` ni `validation.js`.
+
+La URL pública temporal `https://congenial-space-goldfish-r7qvg4jg6qx3x6rj-8080.app.github.dev/` devolvió HTTP 200 para la landing y los recursos locales revisados. `application.html` también devolvió HTTP 200, pero su contenido sigue en 0 bytes. Esta verificación de transporte no valida el recorrido del formulario ni sustituye la auditoría de rendimiento. La matriz por criterio está en [docs/acceptance.md](./docs/acceptance.md).
+
+**Rendimiento: bloqueado, sin puntuación ni captura.** PageSpeed Insights respondió HTTP 429 indicando cuota diaria agotada para la API consultada. Se intentó Lighthouse 13.5.0 de forma temporal, sin añadir dependencias al proyecto; en dos intentos Chromium no arrancó y Lighthouse notificó `waiting for dynamic debugging port in chrome-err.log`. No se obtuvo informe utilizable. No se afirma ni se infiere una puntuación. La fase 4 permanece abierta hasta completar Lighthouse o PageSpeed Insights, guardar una captura real con herramienta, fecha, URL y modalidad, y lograr al menos 80 puntos.
+
+La exposición fue solo para esta auditoría, no una publicación. **El servidor temporal de la auditoría ya se detuvo; restablecer el puerto de Codespaces a Private al terminar la revisión**. La publicación final continúa bloqueada hasta implementar el formulario en su entrega independiente y validar CA-02.

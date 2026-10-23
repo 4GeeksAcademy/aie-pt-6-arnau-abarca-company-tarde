@@ -22,9 +22,9 @@ Marcar cada fase cuando sus tareas y comprobaciones estén completas. Ejecutarla
   - [x] Comprobar zoom al 200%, redistribución a 320 CSS px y ausencia de captura de datos, trackers, secretos y datos personales reales.
 
 - [ ] **Fase 4: Auditar y documentar la entrega** (RNF-05, RNF-06; CA-01 a CA-09 del plan).
-  - [ ] Compilar y servir la landing; revisar consola, recursos y enlaces. Revisar lo expuesto y habilitar temporalmente el puerto Public de Codespaces para auditar, sin servir la raíz del monorepo ni modificar infraestructura protegida.
-  - [ ] Obtener rendimiento mínimo de 80, objetivo superior a 90, con PageSpeed Insights o Lighthouse si Codespaces no es accesible; guardar captura, herramienta, fecha, URL, modalidad y resultados reales.
-  - [ ] Completar README y matriz de aceptación con evidencias y bloqueos; revisar el diff y `git diff --check`. No añadir tests ni crear commits sin petición; respetar el máximo de dos intentos de reparación por fallo.
+  - [x] Compilar y servir una copia temporal limitada de la landing; revisar HTTP y recursos locales. No se sirvió la raíz del monorepo. La auditoría de consola de navegador sigue pendiente.
+  - [ ] Obtener rendimiento mínimo de 80, objetivo superior a 90, con PageSpeed Insights o Lighthouse si Codespaces no es accesible; guardar captura, herramienta, fecha, URL, modalidad y resultados reales. PageSpeed Insights devolvió HTTP 429; Lighthouse no pudo iniciar Chromium porque falta `libglib-2.0.so.0`. No hay puntuación ni captura. Repetir cuando la cuota o el entorno estén disponibles.
+  - [x] Documentar resultados y límites reales en [README.es.md](../../uis/website/README.es.md) y [la matriz CA-01–CA-09](../../uis/website/docs/acceptance.md); revisar el diff y ejecutar `git diff --check`. La fase sigue abierta solo por la puntuación de rendimiento y su captura, y por la revisión de consola pendiente.
 
 **Dependencia de publicación:** mantener pendiente CA-02 y posponer la publicación final hasta que el formulario se entregue por separado y se valide el recorrido. Una exposición temporal para auditoría no es un lanzamiento.
 
