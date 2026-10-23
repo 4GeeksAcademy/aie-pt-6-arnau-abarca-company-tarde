@@ -1,6 +1,6 @@
 # Contexto técnico
 
-**Actualizado:** 2026-10-22.
+**Actualizado:** 2026-10-23.
 
 ## Stack tecnológico
 
@@ -27,6 +27,8 @@ El monorepo ya contiene una web pública ejecutable de forma local. Su alcance e
 
 La entrada Tailwind genera `assets/styles.css` minificado, excluido de Git junto con las dependencias locales mediante [.gitignore del componente](../uis/website/.gitignore). El HTML sí enlaza ese CSS generado; debe compilarse después de instalar. Las decisiones del componente y sus archivos están descritos en [plan.md](../specs/001-website-nexova/plan.md).
 
+**Incidencia operativa confirmada (2026-10-23):** el CSS generado puede no estar presente tras un checkout o una limpieza porque está ignorado por Git. La landing se visualiza sin sus estilos hasta ejecutar `npm run build`. Además, iniciar `http-server` desde la raíz del monorepo sirve el contenido equivocado: `/` puede mostrar un índice y las rutas relativas de la landing responden 404. Ejecutar y servir desde `uis/website/`; el diagnóstico debe comprobar el directorio, no inferir que el build o el servidor son correctos por una respuesta 200 en `/`.
+
 Existe además metadata para el paquete privado `@repo/shared-types` en [package.json del paquete compartido](../packages/shared/package.json); no implica un runner de workspace en la raíz. La guía [README.es.md](../README.es.md) recomienda **FastAPI** para una API centralizada, pero esa API no está implementada. La elección de HTML estático solo confirma el frontend de la landing; no decide el stack de futuras interfaces, base de datos, modelos de IA, autenticación o despliegue.
 
 ### Ejecución y verificaciones de la web
@@ -52,6 +54,8 @@ Las comprobaciones se realizaron con Playwright/Chromium y axe-core 4.14.0 como 
 - Las herramientas actuales de Nexova deberán tratarse como sistemas existentes a integrar o sustituir según se definan los casos de uso; el método de integración todavía no está especificado.
 
 Estas pautas generales describen la arquitectura recomendada por [README.es.md](../README.es.md), no servicios ya desplegados. Para la web, aplicar además el alcance de [spec.md](../specs/001-website-nexova/spec.md), las decisiones de [plan.md](../specs/001-website-nexova/plan.md) y las salvaguardas de [AGENTS.md](../AGENTS.md).
+
+Antes de considerar correcto el servidor, validar al menos `/`, `/assets/styles.css` y `/navigation.js`, además de los recursos locales que carga la página. Confirmar que la respuesta raíz contiene el HTML de Nexova y que cada recurso devuelve 200 con contenido no vacío; una página de índice de directorio no es una validación correcta. En Codespaces, abrir el puerto reenviado de ese mismo servidor y considerar caché/consola si las comprobaciones HTTP locales pasan pero el navegador no muestra la landing.
 
 ## Restricciones técnicas y aspectos pendientes
 

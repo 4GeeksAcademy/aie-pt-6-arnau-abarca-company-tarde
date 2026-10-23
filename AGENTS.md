@@ -1,3 +1,6 @@
+- **Ejecución y visualización:** antes de diagnosticar una landing que no carga, confirma el directorio de trabajo (`pwd`) y la URL/puerto utilizados. La página enlaza `assets/styles.css`, un artefacto generado e ignorado por Git: desde `uis/website/`, ejecuta `npm ci` si faltan dependencias y `npm run build` antes de servir. Sirve exclusivamente `uis/website/`, nunca la raíz del monorepo; verifica `/`, `/assets/styles.css` y los recursos locales por HTTP, comprobando tanto el código como el contenido devuelto. Un HTTP 200 en `/` no basta si es un listado de directorio. No supongas que un servidor sigue activo ni que la terminal está en el directorio esperado.
+- **Validación:** usar los comandos del README y comprobaciones enfocadas; no añadir tests sin petición. Máximo dos intentos de corrección por fallo; después, informar y esperar. Distinguir los fallos de entorno de los del sitio y documentar solo resultados observados.
+
 # Instrucciones del proyecto
 
 Estas instrucciones se aplican a todo el monorepo. Conserva las convenciones locales de cada carpeta y limita cada tarea al alcance solicitado.
