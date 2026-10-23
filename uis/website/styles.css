@@ -1,6 +1,8 @@
 @import "tailwindcss" source(none);
 
 @source "./index.html";
+@source "./application.html";
+@source "./validation.js";
 
 @font-face {
 	font-family: "Inter";
@@ -19,4 +21,7 @@
 	--color-muted: #536473;
 	--color-surface: #f5f8fa;
 	--color-divider: #d5dfe6;
+	--color-control-border: #536473;
+	--color-error: #b42318;
+	--color-success: #067647;
 }

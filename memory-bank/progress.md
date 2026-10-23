@@ -9,7 +9,7 @@
 - La landing está en [index.html](../uis/website/index.html), con Tailwind compilado desde [styles.css](../uis/website/styles.css) y navegación móvil en [navigation.js](../uis/website/navigation.js). La instalación y ejecución local están documentadas en [README.es.md de la web](../uis/website/README.es.md).
 - Incidencia de visualización reproducida y resuelta en Codespaces el 2026-10-23: el artefacto `uis/website/assets/styles.css` no existía inicialmente y fue regenerado con `npm run build`. También se reprodujo que servir desde la raíz del monorepo muestra un índice de directorio y devuelve 404 para los recursos de la landing. Sirviendo desde `uis/website/`, `/`, CSS, JavaScript, fotografía y fuente devolvieron HTTP 200. El servidor de comprobación se detuvo al terminar la prueba.
 - El contenido y el marcado `Organization` siguen [BRIEFING.md](../uis/website/BRIEFING.md), con el diseño de [DESIGN.md](../uis/website/docs/DESIGN.md) y las correcciones de auditoría de [AGENTS.md](../AGENTS.md): fundación en 2011, 15 años de experiencia y copyright 2026.
-- El formulario es una entrega independiente: [application.html](../uis/website/application.html) y [validation.js](../uis/website/validation.js) siguen vacíos. El CTA prepara su destino, pero el recorrido de registro y CA-02 no se consideran completados. La publicación final está aplazada, como recoge [plan.md](../specs/001-website-nexova/plan.md).
+- El formulario de talento es una entrega independiente y ya está implementado en [application.html](../uis/website/application.html), [validation.js](../uis/website/validation.js) y Tailwind. Su aceptación interactiva sigue abierta: en [tasks.md de la entrega 002](../specs/002-talent-form-nexova/tasks.md), las tareas 4.2–4.9 están sin marcar. La matriz [talent-form-acceptance.md](../uis/website/docs/talent-form-acceptance.md) registra qué se revisó estáticamente y qué requiere navegador.
 - El contexto general se mantiene en [projectbrief.md](./projectbrief.md) y [techContext.md](./techContext.md). FastAPI sigue siendo una propuesta, no una API implementada; la organización general del monorepo se describe en [README.es.md](../README.es.md).
 
 ## Validaciones realizadas
@@ -21,6 +21,7 @@ Los resultados y sus límites están documentados en [README.es.md de la web](..
 - Contenido y navegación revisados a 375px, 768px y 1440px; teclado, foco, menú y alternativa sin JavaScript comprobados. El JSON-LD se comparó estructuralmente con el briefing.
 - Axe-core 4.14.0 sin infracciones detectadas en los estados revisados de móvil y escritorio, complementado con recorrido de teclado. Zoom nativo al 200% y redistribución a 320 CSS px comprobados sin desbordamientos ni solapamientos detectados.
 - Las visitas revisadas no capturaron datos ni generaron peticiones automáticas a terceros o almacenamiento del navegador. Esto no certifica seguridad ni conformidad completa con WCAG; no se ha probado con un lector de pantalla real ni con un validador externo de Schema.org.
+- Para el formulario, `node --check validation.js`, `node --check navigation.js`, `npm run build` e inspecciones estáticas/HTTP constan como correctos en su documentación (2026-10-23). No se observaron en navegador los casos funcionales 4.2–4.9; no afirmar que se verificaron red/almacenamiento, JavaScript desactivado, teclado, lector de pantalla, responsive o zoom. La revisión guiada se pausó antes de ejecutar los pasos; el usuario no va a probarlos ahora.
 
 ## Limitaciones actuales
 
@@ -34,7 +35,6 @@ Los resultados y sus límites están documentados en [README.es.md de la web](..
 
 ## Próximos pasos sugeridos
 
-1. Completar únicamente cuando se solicite la fase 4 de [tasks.md](../specs/001-website-nexova/tasks.md), documentando resultados reales y requisitos pendientes sin confundir auditoría temporal con publicación final.
-2. Preparar una especificación independiente para el formulario y su envío simulado conforme a [BRIEFING.md](../uis/website/BRIEFING.md); no añadir persistencia ni envío real como parte de esa entrega.
-3. Validar el recorrido landing-formulario antes de cerrar CA-02 y publicar, de acuerdo con [spec.md](../specs/001-website-nexova/spec.md) y [plan.md](../specs/001-website-nexova/plan.md).
-4. Para futuros servicios y automatizaciones, acordar arquitectura y reglas de datos antes de integrar sistemas, manteniendo las decisiones pendientes de [techContext.md](./techContext.md).
+1. Al retomar el formulario, reanudar por la tarea 4.2 con comprobaciones de navegador, en pasos guiados. No marcar tareas 4.2–4.9 ni cerrar la matriz hasta contar con evidencia real; si el usuario no puede probarlas, mantenerlas pendientes.
+2. Mantener aparte la fase 4 de la landing: rendimiento y evidencias de despliegue siguen pendientes según [tasks.md](../specs/001-website-nexova/tasks.md).
+3. Para futuros servicios y automatizaciones, acordar arquitectura y reglas de datos antes de integrar sistemas, manteniendo las decisiones pendientes de [techContext.md](./techContext.md).

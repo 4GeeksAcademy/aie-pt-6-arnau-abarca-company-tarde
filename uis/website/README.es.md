@@ -4,9 +4,9 @@ Landing corporativa estática, con HTML y Tailwind CSS compilado. La especificac
 
 ## Estado
 
-Las fases 1 a 3 están completadas: base ejecutable, contenido semántico, diseño responsive, navegación, metadatos, Schema.org y comprobaciones de accesibilidad y privacidad. El formulario y su validación pertenecen a otra entrega; no se han modificado.
+Las fases 1 a 3 de la landing están completadas: base ejecutable, contenido semántico, diseño responsive, navegación, metadatos, Schema.org y comprobaciones de accesibilidad y privacidad. El formulario de talento pertenece a la entrega independiente [002-talent-form-nexova](../../specs/002-talent-form-nexova/spec.md): su página y validación están implementadas, pero su aceptación integral sigue pendiente de comprobaciones interactivas en navegador.
 
-El destino previsto del registro es `application.html`. La publicación final queda pendiente hasta que exista el formulario y se valide el recorrido completo. La evaluación de rendimiento y la auditoría pública de la fase 4 siguen pendientes.
+El destino del registro es `application.html`. La publicación final de la landing continúa condicionada por sus tareas de rendimiento pendientes; la aceptación completa del formulario también sigue abierta. El estado previo de la auditoría de landing se conserva más abajo como registro histórico.
 
 ## Requisitos
 
@@ -20,7 +20,7 @@ npm ci
 npm run build
 ```
 
-Las versiones directas están fijadas y el lockfile permite reproducir las dependencias transitivas. `styles.css` importa Tailwind y declara `index.html` como fuente de clases. El comando genera `assets/styles.css` minificado, que no se versiona y debe regenerarse después de instalar.
+Las versiones directas están fijadas y el lockfile permite reproducir las dependencias transitivas. `styles.css` importa Tailwind y declara `index.html`, `application.html` y `validation.js` como fuentes de clases; así se incluyen también las clases usadas por los estados dinámicos. El comando genera `assets/styles.css` minificado, que no se versiona y debe regenerarse después de instalar.
 
 Para recompilar automáticamente al cambiar HTML o estilos, ejecutar en otra terminal:
 
@@ -28,7 +28,7 @@ Para recompilar automáticamente al cambiar HTML o estilos, ejecutar en otra ter
 npm run watch
 ```
 
-La compilación no modifica el HTML. La landing enlaza el CSS generado y utiliza sus clases utilitarias; no se utiliza Tailwind mediante CDN.
+La compilación no modifica el HTML. La landing y el formulario enlazan el CSS generado y utilizan sus clases utilitarias; no se utiliza Tailwind mediante CDN.
 
 ## Ejecución local
 
@@ -50,6 +50,14 @@ En Codespaces, abrir la URL reenviada del puerto desde la pestaña Puertos. No s
 - Con el servidor iniciado, comprobar HTTP 200 en `/` y `/assets/styles.css`. Esa respuesta confirma el transporte, no el cumplimiento de todos los requisitos de la landing.
 
 Comprobado el 2026-10-22 en Codespaces con Node.js 22.23.4 y npm 10.9.9: `npm ci`, `npm run build` y el servidor `npx` en el puerto 8080 funcionaron. `npm audit` reportó cero vulnerabilidades conocidas. Ambas rutas devolvieron HTTP 200 y coincidieron con sus archivos locales: HTML de 0 bytes y CSS de 4.011 bytes. El modo `watch` está configurado, pero no se ha comprobado su recompilación automática.
+
+## Formulario de talento
+
+`application.html` contiene el registro profesional descrito en [la especificación 002](../../specs/002-talent-form-nexova/spec.md). Su controlador es `validation.js`; la validación y el estado de éxito son locales y simulados. No se transmiten ni persisten los valores del formulario. La página declara un mensaje `<noscript>` y conserva deshabilitada la acción hasta que el controlador inicialice.
+
+Para compilar, servir y comprobar recursos, seguir los comandos anteriores desde `uis/website/`. Tailwind escanea `index.html`, `application.html` y `validation.js`; `npm run build` vuelve a generar el CSS ignorado `assets/styles.css`. El servidor debe servir únicamente este directorio, nunca la raíz del monorepo.
+
+Comprobaciones observadas el 2026-10-23: `node --check validation.js`, `node --check navigation.js` y `npm run build` finalizaron correctamente. El servidor ya activo en el puerto local 8080 respondió HTTP 200 con contenido no vacío para `application.html`, `assets/styles.css`, `validation.js`, la fuente local e `index.html`. Una inspección estática cotejó campos, mensajes, textos de éxito y ausencia de llamadas de red/almacenamiento en el código. No se dispuso de Chromium ni de `playwright`, `puppeteer` o `jsdom` en el proyecto; por tanto, no se ejecutaron las pruebas interactivas, visuales, con JavaScript desactivado, con teclado o lector de pantalla, ni las inspecciones de red/almacenamiento del navegador. No se afirma aceptación integral. La evidencia por criterio y las limitaciones están en [docs/talent-form-acceptance.md](./docs/talent-form-acceptance.md).
 
 ## Recursos visuales y licencias
 
@@ -103,7 +111,7 @@ La comprobación de teclado y las capturas complementan axe-core, pero no certif
 
 Se reconstruyó la hoja de estilos con `npm run build` y `node --check navigation.js` terminó correctamente. Para limitar la exposición pública, se preparó una copia temporal en `/tmp/nexova-public-audit/` con el HTML, navegación, CSS y recursos necesarios; no se sirvió la raíz del monorepo ni se expusieron `node_modules`, el lockfile o la documentación. La copia incluyó `application.html` vacío, que es el destino enlazado por «Talento» y el CTA. No se modificaron `application.html` ni `validation.js`.
 
-La URL pública temporal `https://congenial-space-goldfish-r7qvg4jg6qx3x6rj-8080.app.github.dev/` devolvió HTTP 200 para la landing y los recursos locales revisados. `application.html` también devolvió HTTP 200, pero su contenido sigue en 0 bytes. Esta verificación de transporte no valida el recorrido del formulario ni sustituye la auditoría de rendimiento. La matriz por criterio está en [docs/acceptance.md](./docs/acceptance.md).
+La URL pública temporal `https://congenial-space-goldfish-r7qvg4jg6qx3x6rj-8080.app.github.dev/` devolvió HTTP 200 para la landing y los recursos locales revisados. En aquella auditoría, `application.html` también devolvió HTTP 200, pero su contenido estaba en 0 bytes. Esta verificación histórica de transporte no validaba el recorrido del formulario ni sustituía la auditoría de rendimiento. La matriz de landing está en [docs/acceptance.md](./docs/acceptance.md); la del formulario se mantiene separada en [docs/talent-form-acceptance.md](./docs/talent-form-acceptance.md).
 
 **Rendimiento: bloqueado, sin puntuación ni captura.** PageSpeed Insights respondió HTTP 429 indicando cuota diaria agotada para la API consultada. Se intentó Lighthouse 13.5.0 de forma temporal, sin añadir dependencias al proyecto; en dos intentos Chromium no arrancó y Lighthouse notificó `waiting for dynamic debugging port in chrome-err.log`. No se obtuvo informe utilizable. No se afirma ni se infiere una puntuación. La fase 4 permanece abierta hasta completar Lighthouse o PageSpeed Insights, guardar una captura real con herramienta, fecha, URL y modalidad, y lograr al menos 80 puntos.
 
