@@ -1,6 +1,6 @@
 # Progreso del proyecto
 
-**Actualizado:** 2026-10-23.
+**Actualizado:** 2026-10-24.
 
 ## Estado actual del desarrollo
 
@@ -9,7 +9,7 @@
 - La landing está en [index.html](../uis/website/index.html), con Tailwind compilado desde [styles.css](../uis/website/styles.css) y navegación móvil en [navigation.js](../uis/website/navigation.js). La instalación y ejecución local están documentadas en [README.es.md de la web](../uis/website/README.es.md).
 - Incidencia de visualización reproducida y resuelta en Codespaces el 2026-10-23: el artefacto `uis/website/assets/styles.css` no existía inicialmente y fue regenerado con `npm run build`. También se reprodujo que servir desde la raíz del monorepo muestra un índice de directorio y devuelve 404 para los recursos de la landing. Sirviendo desde `uis/website/`, `/`, CSS, JavaScript, fotografía y fuente devolvieron HTTP 200. El servidor de comprobación se detuvo al terminar la prueba.
 - El contenido y el marcado `Organization` siguen [BRIEFING.md](../uis/website/BRIEFING.md), con el diseño de [DESIGN.md](../uis/website/docs/DESIGN.md) y las correcciones de auditoría de [AGENTS.md](../AGENTS.md): fundación en 2011, 15 años de experiencia y copyright 2026.
-- El formulario de talento es una entrega independiente y ya está implementado en [application.html](../uis/website/application.html), [validation.js](../uis/website/validation.js) y Tailwind. Su aceptación interactiva sigue abierta: en [tasks.md de la entrega 002](../specs/002-talent-form-nexova/tasks.md), las tareas 4.2–4.9 están sin marcar. La matriz [talent-form-acceptance.md](../uis/website/docs/talent-form-acceptance.md) registra qué se revisó estáticamente y qué requiere navegador.
+- El formulario de talento es una entrega independiente y está implementado en [application.html](../uis/website/application.html), [validation.js](../uis/website/validation.js) y Tailwind. Su header ahora usa `sticky top-0 z-20`, igual que el de la landing, para permanecer arriba al desplazarse. La aceptación interactiva sigue abierta: en [tasks.md de la entrega 002](../specs/002-talent-form-nexova/tasks.md), las tareas 4.2–4.9 están sin marcar. La matriz [talent-form-acceptance.md](../uis/website/docs/talent-form-acceptance.md) registra qué se revisó estáticamente y qué requiere navegador.
 - El contexto general se mantiene en [projectbrief.md](./projectbrief.md) y [techContext.md](./techContext.md). FastAPI sigue siendo una propuesta, no una API implementada; la organización general del monorepo se describe en [README.es.md](../README.es.md).
 
 ## Validaciones realizadas
@@ -22,6 +22,7 @@ Los resultados y sus límites están documentados en [README.es.md de la web](..
 - Axe-core 4.14.0 sin infracciones detectadas en los estados revisados de móvil y escritorio, complementado con recorrido de teclado. Zoom nativo al 200% y redistribución a 320 CSS px comprobados sin desbordamientos ni solapamientos detectados.
 - Las visitas revisadas no capturaron datos ni generaron peticiones automáticas a terceros o almacenamiento del navegador. Esto no certifica seguridad ni conformidad completa con WCAG; no se ha probado con un lector de pantalla real ni con un validador externo de Schema.org.
 - Para el formulario, `node --check validation.js`, `node --check navigation.js`, `npm run build` e inspecciones estáticas/HTTP constan como correctos en su documentación (2026-10-23). No se observaron en navegador los casos funcionales 4.2–4.9; no afirmar que se verificaron red/almacenamiento, JavaScript desactivado, teclado, lector de pantalla, responsive o zoom. La revisión guiada se pausó antes de ejecutar los pasos; el usuario no va a probarlos ahora.
+- El 2026-10-24 se igualaron las clases de posicionamiento sticky del header del formulario y de la landing. `git diff --check` pasó y las rutas `/`, `/assets/styles.css` y `/application.html` respondieron HTTP 200 en el puerto 8080. Esto verifica el diff y la entrega HTTP, no el comportamiento visual en navegador; las tareas interactivas 4.2–4.9 continúan pendientes.
 
 ## Limitaciones actuales
 

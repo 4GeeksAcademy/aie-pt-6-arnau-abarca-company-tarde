@@ -3,6 +3,7 @@
 Complementan [AGENTS.md](../../AGENTS.md). Fuentes: [spec.md](../../specs/001-website-nexova/spec.md), [plan.md](../../specs/001-website-nexova/plan.md), [BRIEFING.md](./BRIEFING.md) y [DESIGN.md](./docs/DESIGN.md).
 
 - **Alcance:** solo la landing; formulario, backend, persistencia y analítica quedan fuera. No modificar `application.html` ni `validation.js` en esta entrega.
+- **Consistencia del header:** cuando una tarea independiente autorice cambios en el formulario, conservar en `application.html` el comportamiento sticky del header de la landing (`sticky top-0 z-20`), salvo que un requisito explícito indique lo contrario. La regla de alcance anterior sigue separando ambas entregas.
 - **Trabajo:** completar y validar cada tarea antes de iniciar la siguiente; marcarla en [tasks.md](../../specs/001-website-nexova/tasks.md). Preservar cambios existentes y no crear commits sin petición.
 - **Contenido:** el briefing prevalece sobre las omisiones del diseño. Mantener español, orden de secciones y textos requeridos; fundación en 2011, 15 años de experiencia y copyright 2026.
 - **Datos confirmados:** no publicar direcciones exactas sin aprobación ni extender la garantía de headhunting a otros servicios. No ampliar ni sustituir la referencia al mercado latinoamericano sin acuerdo.

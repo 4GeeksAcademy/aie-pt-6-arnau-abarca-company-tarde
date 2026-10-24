@@ -1,6 +1,6 @@
 # Contexto técnico
 
-**Actualizado:** 2026-10-23.
+**Actualizado:** 2026-10-24.
 
 ## Stack tecnológico
 
@@ -15,7 +15,7 @@ Estas herramientas forman el entorno actual de la empresa descrito en [CONTEXT.e
 
 ### Stack del proyecto
 
-El monorepo contiene la landing estática y una página independiente de registro de talento, sin backend. La landing está definida en [spec.md](../specs/001-website-nexova/spec.md); el formulario y su validación local simulada en [spec.md de la entrega 002](../specs/002-talent-form-nexova/spec.md). Las tareas interactivas de aceptación del formulario 4.2–4.9 siguen pendientes; no hay despliegue de producción confirmado.
+El monorepo contiene la landing estática y una página independiente de registro de talento, sin backend. La landing está definida en [spec.md](../specs/001-website-nexova/spec.md); el formulario y su validación local simulada en [spec.md de la entrega 002](../specs/002-talent-form-nexova/spec.md). El header del formulario usa el mismo posicionamiento sticky (`sticky top-0 z-20`) que el de la landing. Las tareas interactivas de aceptación del formulario 4.2–4.9 siguen pendientes; no hay despliegue de producción confirmado.
 
 | Componente de la web  | Implementación y fuente                                                                                                                                                                                                                                                                        |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,6 +63,7 @@ Antes de considerar correcto el servidor, validar al menos `/`, `/assets/styles.
 - No asumir plataforma integrada, telemetría centralizada o despliegue automatizado. Las herramientas corporativas y el SLA de soporte de 24 horas pertenecen al entorno descrito en [CONTEXT.es.md](../CONTEXT.es.md), no a capacidades de la landing.
 - La web no incorpora persistencia, autenticación, analítica ni integración con HubSpot, Zendesk, ATS o Google Workspace. Esos protocolos y APIs siguen por definir; véanse [spec.md](../specs/001-website-nexova/spec.md) y [CONTEXT.es.md](../CONTEXT.es.md).
 - El formulario está implementado, pero las pruebas manuales 4.2–4.9 no están completadas. No inferir comportamiento del navegador a partir de inspección estática ni marcar tareas sin observar sus escenarios.
+- El header sticky del formulario comparte las clases de posicionamiento del header de la landing; el cambio se verificó estáticamente y por HTTP, pero no mediante inspección visual en navegador.
 - La publicación final de la landing sigue condicionada por sus tareas de rendimiento de fase 4: [plan.md](../specs/001-website-nexova/plan.md) y [tasks.md](../specs/001-website-nexova/tasks.md); esta condición es independiente del formulario.
 - Los datos de candidatos, empleados, clientes y tickets pueden ser sensibles. Antes de procesarlos hay que definir acceso, privacidad, retención y tratamiento; las comprobaciones de una landing sin captura no resuelven esas políticas. Salvaguardas en [AGENTS.md](../AGENTS.md).
 - Siguen pendientes las decisiones generales de persistencia, colas, proveedor de IA, autenticación/autorización, observabilidad, CI/CD, despliegue y futuras interfaces. No extender el stack de la landing al resto del sistema sin una decisión documentada; alcance general en [projectbrief.md](./projectbrief.md).
