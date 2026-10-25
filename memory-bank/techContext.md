@@ -1,6 +1,6 @@
 # Contexto técnico
 
-**Actualizado:** 2026-10-24.
+**Actualizado:** 2026-10-25.
 
 ## Stack tecnológico
 
@@ -19,7 +19,7 @@ El monorepo contiene la landing estática y una página independiente de registr
 
 | Componente de la web  | Implementación y fuente                                                                                                                                                                                                                                                                        |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Documento público     | HTML5 semántico en español, metadatos y JSON-LD `Organization`: [index.html](../uis/website/index.html).                                                                                                                                                                                       |
+| Documento público     | HTML5 semántico en español, metadatos, canonical y JSON-LD `Organization`: [index.html](../uis/website/index.html). La landing y el formulario declaran canonicals para `https://nexova.com/` y `https://nexova.com/application.html`; publicación e indexabilidad aún no confirmadas.                                                                                                                                 |
 | Estilos               | Tailwind CSS y CLI 4.3.0, sin framework de frontend; entrada con importación, fuente local y tokens en [styles.css](../uis/website/styles.css). Versiones y scripts en [package.json](../uis/website/package.json).                                                                            |
 | Navegación            | JavaScript nativo con menú no modal, teclado, estado ARIA, cambios de breakpoint y alternativa sin JavaScript: [navigation.js](../uis/website/navigation.js) e [index.html](../uis/website/index.html).                                                                                        |
 | Formulario de talento | HTML en `application.html` y validación/envío simulado en `validation.js`; no transmitir ni persistir datos. La evidencia y las pruebas pendientes están en [matriz del formulario](../uis/website/docs/talent-form-acceptance.md) y [tasks.md 002](../specs/002-talent-form-nexova/tasks.md). |

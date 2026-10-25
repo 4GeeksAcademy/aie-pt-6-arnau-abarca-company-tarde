@@ -10,7 +10,7 @@ Complementan [AGENTS.md](../../AGENTS.md). Fuentes: [spec.md](../../specs/001-we
 - **Tecnología:** HTML semántico, Tailwind compilado y JavaScript mínimo. Sin framework, CDN de estilos ni CSS personalizado innecesario.
 - **Responsive:** mobile-first; servicios en tres columnas y ventajas en dos en escritorio, una en móvil. Resolver discrepancias tipográficas y evitar desbordamientos.
 - **Accesibilidad:** objetivo WCAG 2.2 AA; H1 único, encabezados jerárquicos, alternativas de imágenes, salto al contenido, teclado, foco visible y contraste comprobado. ARIA solo cuando aporte valor.
-- **SEO:** idioma, título, metadescripción y JSON-LD `Organization` con los datos del briefing; conservar la URL corporativa, no sustituirla por Codespaces.
+- **SEO:** idioma, título y metadescripción propios; JSON-LD `Organization` en la landing con los datos del briefing; canonical autorreferente en cada página usando el dominio corporativo, no Codespaces. No añadir `robots.txt` ni `sitemap.xml` hasta confirmar producción y decidir la indexabilidad del formulario.
 - **Recursos:** imágenes optimizadas, dimensiones estables, fuentes e iconos locales; documentar procedencia y licencias en [README.es.md](./README.es.md).
 - **Privacidad:** no capturar datos, introducir secretos ni modificar contexto protegido o infraestructura sin autorización.
 - **Ejecución local:** trabajar desde `uis/website/`. `assets/styles.css` es un artefacto generado e ignorado por Git, aunque `index.html` lo enlaza; ejecutar `npm run build` después de clonar, instalar o limpiar antes de abrir la página. Si faltan dependencias, usar `npm ci` desde esta carpeta.

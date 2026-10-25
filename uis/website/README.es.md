@@ -93,7 +93,7 @@ Comprobado el 2026-10-22 con Chromium 156 y herramientas temporales de validaci�
 
 | Área                 | Resultado                                                                                                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SEO                  | Idioma español, título descriptivo y metadescripción de 152 caracteres presentes en el DOM.                                                                                                                               |
+| SEO                  | Idioma español, título descriptivo, metadescripción de 152 caracteres y canonical absoluto de la landing presentes en el DOM.                                                                                             |
 | Schema.org           | JSON-LD parseable de tipo `Organization`, comparado estructuralmente y coincidente con el JSON del briefing. Conserva `https://nexova.com`, fundación en 2011, ubicaciones y contacto sin direcciones inventadas.         |
 | Semántica e imágenes | Un H1, jerarquía H2/H3 sin saltos, imagen informativa con alternativa descriptiva e iconos decorativos con `alt=""`. Sin índices de tabulación positivos.                                                                 |
 | Salto al contenido   | Primer Tab muestra «Saltar al contenido» con foco visible; Enter mueve el foco al `main`.                                                                                                                                 |
@@ -104,6 +104,10 @@ Comprobado el 2026-10-22 con Chromium 156 y herramientas temporales de validaci�
 | Privacidad           | Sin formularios ni campos de captura, cookies, localStorage, sessionStorage o service workers. En las visitas comprobadas solo hubo peticiones GET al servidor local, sin solicitudes automáticas a terceros.             |
 
 Se revisaron las fuentes de la landing sin detectar patrones de credenciales; los emails y teléfonos son exclusivamente los del briefing. No se procesa información de candidatos y el formulario sigue intacto. Esta revisión está limitada a los archivos y comportamientos comprobados; no es una certificación de seguridad.
+
+La landing y `application.html` declaran URLs canonical autorreferentes en `https://nexova.com/` y `https://nexova.com/application.html`, respectivamente, usando el dominio corporativo del briefing y del JSON-LD. No se han añadido `robots.txt` ni `sitemap.xml`: la publicación de producción no está confirmada y sigue pendiente decidir si el formulario debe indexarse. Revisar esa decisión y la accesibilidad de las URLs antes de una publicación.
+
+Validación enfocada realizada el 2026-10-25: `npm run build`, `node --check navigation.js`, `node --check validation.js`, comprobación literal de ambos canonical en sus HTML y `git diff --check` finalizaron correctamente. Esto verifica el build, la sintaxis y los valores presentes en las fuentes; no comprueba que las URLs canónicas estén publicadas o sean accesibles, ni la indexación, el rendimiento o la visualización en navegador.
 
 La comprobación de teclado y las capturas complementan axe-core, pero no certifican por sí solas la conformidad completa con WCAG. No se ha realizado una prueba de usuario con lector de pantalla ni una validación externa del marcado Schema.org. No hay una suite de pruebas de la landing configurada.
 
