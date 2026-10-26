@@ -1,24 +1,44 @@
 # Progreso del proyecto
 
+**Actualizado:** 2026-10-25.
+
 ## Estado actual del desarrollo
 
-- El repositorio está en fase de preparación: contiene la estructura base del monorepo, guías y documentación de contexto para Nexova.
-- Se han documentado el brief del proyecto y el contexto técnico en `memory-bank/`.
-- No hay aplicaciones o servicios ejecutables del proyecto implementados todavía. Existe metadata para el paquete TypeScript `@repo/shared-types`, pero no un runner de workspace en la raíz.
-- La arquitectura propuesta por la guía incluye una API centralizada en FastAPI y una organización por responsabilidades; aún no está confirmada mediante una implementación.
+- El primer caso de uso implementado es la landing pública de Nexova. Su alcance, usuarios y criterios de aceptación están en [spec.md](../specs/001-website-nexova/spec.md); el trabajo se organiza en [plan.md](../specs/001-website-nexova/plan.md) y [tasks.md](../specs/001-website-nexova/tasks.md).
+- Las fases 1 a 3 están completadas: base ejecutable, contenido y diseño responsive, navegación, SEO, Schema.org y comprobaciones de accesibilidad y privacidad. La fase 4 sigue pendiente según [tasks.md](../specs/001-website-nexova/tasks.md).
+- La landing está en [index.html](../uis/website/index.html), con Tailwind compilado desde [styles.css](../uis/website/styles.css) y navegación móvil en [navigation.js](../uis/website/navigation.js). La instalación y ejecución local están documentadas en [README.es.md de la web](../uis/website/README.es.md).
+- Incidencia de visualización reproducida y resuelta en Codespaces el 2026-10-23: el artefacto `uis/website/assets/styles.css` no existía inicialmente y fue regenerado con `npm run build`. También se reprodujo que servir desde la raíz del monorepo muestra un índice de directorio y devuelve 404 para los recursos de la landing. Sirviendo desde `uis/website/`, `/`, CSS, JavaScript, fotografía y fuente devolvieron HTTP 200. El servidor de comprobación se detuvo al terminar la prueba.
+- El contenido y el marcado `Organization` siguen [BRIEFING.md](../uis/website/BRIEFING.md), con el diseño de [DESIGN.md](../uis/website/docs/DESIGN.md) y las correcciones de auditoría de [AGENTS.md](../AGENTS.md): fundación en 2011, 15 años de experiencia y copyright 2026.
+- El 2026-10-25 se añadieron canonicals autorreferentes a la landing (`https://nexova.com/`) y al formulario (`https://nexova.com/application.html`). `npm run build`, las comprobaciones de sintaxis JavaScript y `git diff --check` finalizaron correctamente; también se comprobó que los valores exactos constan en ambos HTML. El README de la web registra el alcance y límites: no se verificaron publicación, accesibilidad externa ni indexación. No se añadieron `robots.txt` ni `sitemap.xml`; quedan pendientes confirmar producción e indexabilidad del formulario.
+- El formulario de talento es una entrega independiente y está implementado en [application.html](../uis/website/application.html), [validation.js](../uis/website/validation.js) y Tailwind. Su header ahora usa `sticky top-0 z-20`, igual que el de la landing, para permanecer arriba al desplazarse. La aceptación interactiva sigue abierta: en [tasks.md de la entrega 002](../specs/002-talent-form-nexova/tasks.md), las tareas 4.2–4.9 están sin marcar. La matriz [talent-form-acceptance.md](../uis/website/docs/talent-form-acceptance.md) registra qué se revisó estáticamente y qué requiere navegador.
+- El contexto general se mantiene en [projectbrief.md](./projectbrief.md) y [techContext.md](./techContext.md). FastAPI sigue siendo una propuesta, no una API implementada; la organización general del monorepo se describe en [README.es.md](../README.es.md).
+
+## Validaciones realizadas
+
+Los resultados y sus límites están documentados en [README.es.md de la web](../uis/website/README.es.md):
+
+- Instalación mediante `npm ci`, compilación y servidor `npx` comprobados. La auditoría de dependencias reportó cero vulnerabilidades conocidas en la comprobación documentada del 2026-10-22; no es una garantía permanente. El modo `watch` está configurado, pero su recompilación automática no se ha verificado.
+- Tras la incidencia del 2026-10-23, `npm run build` regeneró `assets/styles.css` (12.982 bytes); `node --check navigation.js` terminó correctamente. Con el servidor iniciado en `uis/website/`, `/` (12.444 bytes), `/assets/styles.css`, `/assets/team.webp`, `/assets/team-small.webp`, `/assets/inter-latin-variable.woff2` y `/navigation.js` respondieron HTTP 200. Se verificó que `/` entrega el título Nexova y enlaza el CSS y JavaScript esperados. Estas comprobaciones no prueban la visualización en el navegador del usuario ni sustituyen la auditoría de rendimiento.
+- Contenido y navegación revisados a 375px, 768px y 1440px; teclado, foco, menú y alternativa sin JavaScript comprobados. El JSON-LD se comparó estructuralmente con el briefing.
+- Axe-core 4.14.0 sin infracciones detectadas en los estados revisados de móvil y escritorio, complementado con recorrido de teclado. Zoom nativo al 200% y redistribución a 320 CSS px comprobados sin desbordamientos ni solapamientos detectados.
+- Las visitas revisadas no capturaron datos ni generaron peticiones automáticas a terceros o almacenamiento del navegador. Esto no certifica seguridad ni conformidad completa con WCAG; no se ha probado con un lector de pantalla real ni con un validador externo de Schema.org.
+- Para el formulario, `node --check validation.js`, `node --check navigation.js`, `npm run build` e inspecciones estáticas/HTTP constan como correctos en su documentación (2026-10-23). No se observaron en navegador los casos funcionales 4.2–4.9; no afirmar que se verificaron red/almacenamiento, JavaScript desactivado, teclado, lector de pantalla, responsive o zoom. La revisión guiada se pausó antes de ejecutar los pasos; el usuario no va a probarlos ahora.
+- El 2026-10-24 se igualaron las clases de posicionamiento sticky del header del formulario y de la landing. `git diff --check` pasó y las rutas `/`, `/assets/styles.css` y `/application.html` respondieron HTTP 200 en el puerto 8080. Esto verifica el diff y la entrega HTTP, no el comportamiento visual en navegador; las tareas interactivas 4.2–4.9 continúan pendientes.
+- El 2026-10-25, tras el cambio SEO, `npm run build`, `node --check navigation.js`, `node --check validation.js`, la comprobación literal de ambos canonical y `git diff --check` finalizaron correctamente. No se realizó prueba HTTP, revisión en navegador, auditoría de rendimiento ni comprobación de indexación; consultar [README.es.md de la web](../uis/website/README.es.md).
 
 ## Limitaciones actuales
 
-- No se ha seleccionado ni implementado un stack completo para frontend, persistencia, IA, autenticación, observabilidad, CI/CD o despliegue.
-- Las herramientas actuales de Nexova (HubSpot, Zendesk legacy, ATS interno y Google Workspace) no tienen integraciones documentadas para este proyecto.
-- No están definidas las políticas de acceso, privacidad, retención y tratamiento de los datos personales que pueden aparecer en candidatos, empleados, clientes y tickets.
-- No existen todavía datos de evaluación ni métricas de producto que permitan medir la calidad de agentes, automatizaciones o pipelines.
-- El soporte al cliente tiene un SLA comprometido de 24 horas, mientras que el tiempo medio de resolución indicado en el contexto es de 48 horas.
+- Pendientes la URL pública temporal de Codespaces, PageSpeed Insights o Lighthouse, la captura con rendimiento mínimo de 80 y el cierre de la matriz de aceptación: [fase 4 de tasks.md](../specs/001-website-nexova/tasks.md). No hay todavía una puntuación de rendimiento verificada.
+- En el intento documentado del 2026-10-23, PageSpeed Insights respondió HTTP 429 por cuota agotada. Lighthouse 13.5.0 no obtuvo un informe: Chromium no arrancó; la inspección del entorno identificó la dependencia de sistema `libglib-2.0.so.0` ausente. No se instaló software del sistema y no existe puntuación ni captura de rendimiento válida. Consultar [README.es.md de la web](../uis/website/README.es.md) y [matriz de aceptación](../uis/website/docs/acceptance.md).
+- La integración del formulario permanece bloqueada por su entrega independiente. La referencia al mercado latinoamericano sigue pendiente de aclaración; no se deben inventar sedes ni publicar direcciones exactas sin confirmar, según [AGENTS.md](../AGENTS.md).
+- La investigación de keyword objetivo y la discrepancia entre «más de 10 años» en el hero y «15 años» en otras partes siguen pendientes de decisión de contenido. No se modificaron textos comerciales por la actualización de canonical.
+- El stack confirmado se limita a la web estática. Persistencia, IA, autenticación, observabilidad, CI/CD y despliegue de producción siguen por definir; véase [techContext.md](./techContext.md).
+- HubSpot, Zendesk legacy, ATS interno y Google Workspace son sistemas existentes, no integraciones implementadas por este proyecto. Tampoco hay una plataforma integrada de evaluación o métricas de producto confirmada; contexto en [CONTEXT.es.md](../CONTEXT.es.md).
+- Antes de procesar datos de candidatos, empleados, clientes o tickets se deben definir acceso, privacidad, retención y tratamiento. La landing actual no resuelve esas políticas: [restricciones de techContext.md](./techContext.md).
+- El contexto de soporte describe 48 horas de resolución media frente a un SLA de 24 horas; esa necesidad operativa sigue fuera del alcance de la landing: [CONTEXT.es.md](../CONTEXT.es.md).
 
 ## Próximos pasos sugeridos
 
-1. Elegir un caso de uso inicial y sus usuarios, alcance y criterios de aceptación. Conviene priorizar un proceso con impacto operativo claro, como reducir el tiempo de resolución de soporte o agilizar el cribado de candidatos.
-2. Acordar las decisiones técnicas mínimas para ese caso: API, interfaz, almacenamiento, integraciones, autenticación y despliegue, documentando las decisiones en `docs/`.
-3. Definir el origen, los permisos y las reglas de tratamiento de los datos necesarios; preparar datos de prueba que no expongan información personal real.
-4. Implementar un primer flujo vertical en las carpetas correspondientes del monorepo, siguiendo la guía de arquitectura y documentando cómo ejecutarlo.
-5. Crear evaluaciones y métricas para validar el resultado con usuarios; añadir observabilidad antes de ampliar el alcance o automatizar decisiones sensibles.
+1. Al retomar el formulario, reanudar por la tarea 4.2 con comprobaciones de navegador, en pasos guiados. No marcar tareas 4.2–4.9 ni cerrar la matriz hasta contar con evidencia real; si el usuario no puede probarlas, mantenerlas pendientes.
+2. Mantener aparte la fase 4 de la landing: rendimiento y evidencias de despliegue siguen pendientes según [tasks.md](../specs/001-website-nexova/tasks.md).
+3. Para futuros servicios y automatizaciones, acordar arquitectura y reglas de datos antes de integrar sistemas, manteniendo las decisiones pendientes de [techContext.md](./techContext.md).
