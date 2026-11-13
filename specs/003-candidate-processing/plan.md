@@ -108,14 +108,15 @@ No añadir un validador para `SelectionProcess` ni mensajes de error literales n
 
 Rutas relativas a la raíz del repositorio. Esta lista describe trabajo futuro, no archivos ya creados.
 
-| Archivo                                              | Acción prevista                                                            |
-| ---------------------------------------------------- | -------------------------------------------------------------------------- |
-| `packages/automatizaciones/README.es.md`             | Documentar propósito, estructura y limitaciones de validación del paquete. |
-| `packages/automatizaciones/types/models.ts`          | Definir interfaces y tipos enumerados del dominio.                         |
-| `packages/automatizaciones/utils/collections.ts`     | Implementar filtros y ordenamientos.                                       |
-| `packages/automatizaciones/utils/search.ts`          | Implementar búsquedas lineales y binaria.                                  |
-| `packages/automatizaciones/utils/transformations.ts` | Implementar scoring, ranking, agrupaciones y reportes.                     |
-| `packages/automatizaciones/utils/validations.ts`     | Implementar validaciones de candidatos, vacantes y email.                  |
+| Archivo                                              | Acción prevista                                                                             |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `packages/automatizaciones/README.es.md`             | Documentar propósito, estructura y limitaciones de validación del paquete.                  |
+| `packages/automatizaciones/demo.ts`                  | Mostrar en consola el uso de las utilidades con datos sintéticos y resultados comprobables. |
+| `packages/automatizaciones/types/models.ts`          | Definir interfaces y tipos enumerados del dominio.                                          |
+| `packages/automatizaciones/utils/collections.ts`     | Implementar filtros y ordenamientos.                                                        |
+| `packages/automatizaciones/utils/search.ts`          | Implementar búsquedas lineales y binaria.                                                   |
+| `packages/automatizaciones/utils/transformations.ts` | Implementar scoring, ranking, agrupaciones y reportes.                                      |
+| `packages/automatizaciones/utils/validations.ts`     | Implementar validaciones de candidatos, vacantes y email.                                   |
 
 ## 10. Criterios de aceptación y trazabilidad
 
